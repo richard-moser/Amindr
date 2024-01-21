@@ -1,33 +1,36 @@
-#Preprocessing
-import pandas as pd
+def txt_to_df(filename):   
+ 
+ import pandas as pd
+ data = []
+ file = open(filename, "r")
+ raw = file.read()
+ 
+	#split into publications
+ publications = raw.split("\n\n\n")
+ #print(len(publications))
 
-data = []
+ for pub in publications:
+  #split into elements
+  element_list = pub.split("\n\n")
 
-file = open("abstract-alzheimers-set.txt", "r")
-raw = file.read()
+  #get title 
+  title = element_list[1]
 
-#split into publications
-publications = raw.split("\n\n\n")
-print(len(publications))
+  #get abstract
+  element_list = [item for item in element_list if "Author information:" not in item]
+  abstract = max(element_list, key=len)
 
-for pub in publications:
-    #split into elements
-    element_list = pub.split("\n\n")
+  #get doi
+  identifier = next((item for item in element_list if "DOI:" in item), None)
+  
+  doc = title+abstract
 
-    #get title 
-    title = element_list[1]
-
-    #get abstract
-    element_list = [item for item in element_list if "Author information:" not in item]
-    abstract = max(element_list, key=len)
-
-    #get doi
-    identifier = next((item for item in element_list if "DOI:" in item), None)
-
-    #save data in list
-    data.append([title, abstract, identifier])
+  #save data in list
+  data.append([title, abstract, identifier, doc])
     
-# Convert list to DataFrame
-publications_df = pd.DataFrame(data, columns=['Title', 'Abstract', 'Identifier'])
-publications_df.head()
+	# Convert list to DataFrame
+ publications_df = pd.DataFrame(data, columns=['Title', 'Abstract', 'Identifier', 'doc'])
+ #publications_df.head()
+ return publications_df
+
 

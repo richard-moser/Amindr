@@ -41,3 +41,15 @@ A_labels_dict = {
     "A9": A9, 
     "A10": A10
 }
+
+def get_sublabel(main_label):
+    if main_label == "A":
+        return A_labels_dict
+    elif main_label == "C":
+        return 
+    elif main_label == "D":
+        return 
+    elif main_label == "F":
+        return 
+    else:
+        raise ValueError("only accepts A,C,D or F")
