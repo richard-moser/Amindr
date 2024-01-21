@@ -1,0 +1,20 @@
+OBJECTIVE: Early synchrony alterations have been observed through 
+electrophysiological techniques in Mild Cognitive Impairment (MCI), which is 
+considered the intermediate phase between healthy aging (HC) and Alzheimer's 
+disease (AD). However, the documented direction (hyper/hypo-synchronization), 
+regions and frequency bands affected are inconsistent. This meta-analysis 
+intended to elucidate existing evidence linked to potential neurophysiological 
+biomarkers of AD.
+METHODS: We conducted a random-effects meta-analysis that entailed the unbiased 
+inclusion of Non-statistically Significant Unreported Effect Sizes ("MetaNSUE") 
+of electroencephalogram (EEG) and magnetoencephalogram (MEG) studies 
+investigating functional connectivity changes at rest along the 
+healthy-pathological aging continuum, searched through PubMed, Scopus, Web of 
+Science and PsycINFO databases until June 2023.
+RESULTS: Of the 3852 articles extracted, we analyzed 12 papers, and we found an 
+alpha synchrony decrease in MCI compared to HC, specifically between 
+temporal-parietal (d = -0.26) and frontal-parietal areas (d = -0.25).
+CONCLUSIONS: Alterations of alpha synchrony are present even at MCI stage.
+SIGNIFICANCE: Synchrony measures may be promising for the detection of the first 
+hallmarks of connectivity alterations, even at the prodromal stages of the AD, 
+before clinical symptoms occur.
