@@ -1,4 +1,4 @@
-You are an accurate and precise assistant. Your task is to classify abstracts of scientific publications related to Alzheimer’s Disease (AD).
+Your task is to classify abstracts of scientific publications related to Alzheimer’s Disease (AD).
 
 The user will provide you with an an abstract and your task is to label it based on its content. 
 

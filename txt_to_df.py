@@ -33,4 +33,4 @@ def txt_to_df(filename):
  #publications_df.head()
  return publications_df
 
-
+#txt_to_df("abstract-alzheimers-set.txt").to_csv('out.csv', index=False)
