@@ -56,13 +56,14 @@ The goal of this main topic is to treat or prevent AD
 def get_prompt (title, body, categories_explained=categories_explained) : #title and #TITLE: {title}.
     prompt = """
 The following is a publication related to Alzheimer's Disease (AD). Please analyze the following abstract of the publication and classify it using the categories and their explanations that are listed afterwards.
-ABSTRACT: {body}.
+TITLE: {title}
+ABSTRACT: {body}
 ABSTRACT END
 You can ONLY choose from the following curated categories:
 Category shortcuts: [F, A1a, A1b, A1c, A2, A3, A4, A5, A6, A7, A8, A9, A10, C1, C2a, C2b, C2c, C2d, C3, C4, C5, D1a, D1b, D2, D3, D4a, D4b, D5, D6, D7, D8, D9, D10]
 Explanations: {categories_explained}
 Use the following JSON template to answer.
-Add all suitable categories to the categories list, starting with the most suitable one. 
+Add all suitable categories to the categories list, starting with the most suitable one. In doubt, only list one category.
 Replace y with the category shortcut and z with a reasoning for your choice. 
 ALWAYS ONLY respond with a valid json for python with the following structure:
 {{

@@ -1,12 +1,30 @@
+import pandas as pd
+from sqlalchemy import create_engine, update, Table, MetaData
+from dotenv import load_dotenv
+import os, json, threading, time 
+import google.generativeai as genai
+from labels_all import get_prompt
+from txt_to_df import txt_to_df
+from test import get_test_df
+
+load_dotenv(".env")
+GEMINI_KEY = os.environ.get("GEMINI_KEY")
+genai.configure(api_key=GEMINI_KEY)
+
+# Gemini API # currently need VPN to outside Europe
+model = genai.GenerativeModel('gemini-pro')
+generation_config = genai.types.GenerationConfig(temperature=0) #default: 1.0
+
+# SQLite for persistent storage
+engine = create_engine('sqlite:///publications.db')
+
+
 import tkinter as tk
 from tkinter import filedialog
 import os
-
-from txt_to_df import txt_to_df
-from instructions import instructions
+from user_instructions import instructions
 from utils import open_file
 
-import pandas as pd
 
 
 class MyApp(tk.Tk):

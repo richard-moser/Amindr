@@ -40,7 +40,7 @@ def txt_to_df(filename):
   title = title.replace("\n", "")
 
   #get abstract
-  element_list = [item for item in element_list if "Author information:" not in item]
+  element_list = [item for item in element_list if "Author information:" not in item and "Conflict of interest statement:" not in item]
   abstract = max(element_list, key=len)
   abstract = abstract.replace("\n", " ")
 
