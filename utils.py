@@ -18,3 +18,14 @@ def open_file(file_path):
     subprocess.run(['gedit', file_path])
  else:
     print(f"Unsupported operating system: {os_name}")
+
+instructions = """
+Instructions:
+
+1. Load data from .txt-file
+2. Check API Key
+3. Connect to VPN-server in the US or one of the regions listed here https://ai.google.dev/available_regions?hl=de
+4. Get the labels. This takes one minute per publication.
+5. In case not all publications were assigned a label, load the labels of the remaining publications.
+6. Save as .csv file
+"""

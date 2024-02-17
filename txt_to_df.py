@@ -49,6 +49,12 @@ def txt_to_df(filename):
     
 	# Convert list to DataFrame
  publications_df = pd.DataFrame(data, columns=['Index','Title', 'Abstract', 'Journal', 'DOI'])
+ 
+ publications_df["category1"] = None
+ publications_df["reasoning1"] = None
+ publications_df["category2"] = None
+ publications_df["reasoning2"] = None
+
  #publications_df.head()
  return publications_df
 

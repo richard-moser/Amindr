@@ -1,40 +1,25 @@
 import pandas as pd
 from sqlalchemy import create_engine, update, Table, MetaData
-from dotenv import load_dotenv
-import os, json, threading, time 
-import google.generativeai as genai
-from labels_all import get_prompt
 from txt_to_df import txt_to_df
-from test import get_test_df
-
-load_dotenv(".env")
-GEMINI_KEY = os.environ.get("GEMINI_KEY")
-genai.configure(api_key=GEMINI_KEY)
-
-# Gemini API # currently need VPN to outside Europe
-model = genai.GenerativeModel('gemini-pro')
-generation_config = genai.types.GenerationConfig(temperature=0) #default: 1.0
-
-# SQLite for persistent storage
-engine = create_engine('sqlite:///publications.db')
-
-
+from archive.test import get_test_df
 import tkinter as tk
 from tkinter import filedialog
 import os
-from user_instructions import instructions
-from utils import open_file
+from utils import open_file, instructions
+from get_categories import Categorizer
 
 
 
 class MyApp(tk.Tk):
     def __init__(self):
         super().__init__()
+        self.engine = create_engine('sqlite:///publications.db')
+
         self.cwd = os.path.dirname(os.path.abspath(__file__))
         self.filename=""
         self.df = pd.DataFrame()
 
-        self.title("My Tkinter App")
+        self.title("Amindr labelling tool")
         self.geometry("800x500")
 
         # Create and place widgets here
@@ -47,6 +32,9 @@ class MyApp(tk.Tk):
         self.modify_categories_button = tk.Button(self, text="modify category definitions", command=self.edit_categories)
         self.modify_categories_button.pack()
 
+        self.check_APIkey_button = tk.Button(self, text="Check API Key", command=self.check_API_Key)
+        self.check_APIkey_button.pack()
+
         self.select_file_button = tk.Button(self, text="select .txt file", command=self.select_file)
         self.select_file_button.pack()
 
@@ -55,6 +43,7 @@ class MyApp(tk.Tk):
         
         self.save_csv_button = tk.Button(self, text="save as .csv-file", command=self.save_csv)
         self.get_labels_button = tk.Button(self, text="get labels", command=self.get_labels)
+
 
     def select_file(self):
         self.filename = filedialog.askopenfilename(initialdir=self.cwd)
@@ -68,8 +57,10 @@ class MyApp(tk.Tk):
         self.info.config(text="Loading data from {}".format(self.filename))
         self.load_content_button.config(text="Loading...", state=tk.DISABLED)
         self.df = txt_to_df(self.filename)
+        num_publications = self.df.shape[0]
         print(self.df[:2])
-        self.info.config(text = "Data successfully loaded")
+        self.df.to_sql('publications', con=self.engine, if_exists='replace', index=False)
+        self.info.config(text = "Successfully loaded data from "+str(num_publications)+" publications")
         self.load_content_button.pack_forget()
         self.select_file_button.pack_forget()
         self.save_csv_button.pack()
@@ -77,22 +68,34 @@ class MyApp(tk.Tk):
 
 
     def get_labels(self):
-        pass
-
-
-
-
-
-
-
+        num_publications = self.df.shape[0]
+        self.info.config(text="Getting the categories of "+str(num_publications)+" publications. This takes one second per publication.")
+        self.get_labels_button.config(text="Loading...", state=tk.DISABLED)
+        categorizer = Categorizer()
+        categorizer.get_categories()
+        remaining_publications = categorizer.get_unlabeled_publications()
+        self.info.config(text = "Got labels for "+ str(num_publications-remaining_publications)+ " out of " + str(num_publications) + " publications")
+        if remaining_publications == 0:
+            self.get_labels_button.pack_forget()
+        else:
+            self.get_labels_button.config(text="Get the other labels", state=tk.ACTIVE, command=self.get_labels)
 
     def save_csv(self):
+        self.df = pd.read_sql_query("SELECT * FROM publications", self.engine)
         folder_path = filedialog.askdirectory(initialdir=self.cwd)
-        self.df.to_csv(folder_path +'output.csv', index=False)
+        self.df.to_csv(folder_path +'new_publications.csv', index=False)
+        self.info.config(text="File successfully saved")
 
     def edit_categories(self):
-        open_file("labels.py")
-        pass
+        open_file("labels_all.py")
+    
+    def check_API_Key(self):
+        path = self.cwd + "/.env"
+        if os.path.exists(path):
+            open_file(".env")
+        else:
+            with open(path, 'w') as f:
+                f.write("GEMINI_KEY = \"\" #insert API key here")
 
 
 
@@ -101,14 +104,6 @@ class MyApp(tk.Tk):
 
 
 
-
-
-
-
-
-
-
-# folder_path = filedialog.askdirectory()
 
 
 

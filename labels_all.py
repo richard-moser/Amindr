@@ -74,3 +74,6 @@ categories: [
 Don't wrap ```json ``` around!
 """.format(title=title, body=body, categories_explained=categories_explained)
     return prompt
+
+
+labels = ["F", "A1a", "A1b", "A1c", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "C1", "C2a", "C2b", "C2c", "C2d", "C3", "C4", "C5", "D1a", "D1b", "D2", "D3", "D4a", "D4b", "D5", "D6", "D7", "D8", "D9", "D10"]
