@@ -1,13 +1,11 @@
 import pandas as pd
 from sqlalchemy import create_engine, update, Table, MetaData
 from txt_to_df import txt_to_df
-from archive.test import get_test_df
 import tkinter as tk
 from tkinter import filedialog
 import os
 from utils import open_file, instructions
 from get_categories import Categorizer
-
 
 
 class MyApp(tk.Tk):

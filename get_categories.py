@@ -5,7 +5,6 @@ import os, json, threading, time
 import google.generativeai as genai
 from labels_all import get_prompt, labels
 
-
 class Categorizer():
     def __init__(self):
         load_dotenv(".env")
