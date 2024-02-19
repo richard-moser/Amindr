@@ -82,7 +82,7 @@ class MyApp(tk.Tk):
     def save_csv(self):
         self.df = pd.read_sql_query("SELECT * FROM publications", self.engine)
         folder_path = filedialog.askdirectory(initialdir=self.cwd)
-        self.df.to_csv(folder_path +'new_publications.csv', index=False)
+        self.df.to_csv(folder_path +'/new_publications.csv', index=False)
         self.info.config(text="File successfully saved")
 
     def edit_categories(self):
