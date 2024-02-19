@@ -11,6 +11,7 @@ from get_categories import Categorizer
 class MyApp(tk.Tk):
     def __init__(self):
         super().__init__()
+        super().configure(bg='white')
         self.engine = create_engine('sqlite:///publications.db')
 
         self.cwd = os.path.dirname(os.path.abspath(__file__))
@@ -21,10 +22,10 @@ class MyApp(tk.Tk):
         self.geometry("800x500")
 
         # Create and place widgets here
-        self.instruction = tk.Label(self, text=instructions, justify="left")
+        self.instruction = tk.Label(self, text=instructions, justify="left", bg='white')
         self.instruction.pack()
 
-        self.info = tk.Label(self, text="")
+        self.info = tk.Label(self, text="", bg='white')
         self.info.pack()
 
         self.modify_categories_button = tk.Button(self, text="modify category definitions", command=self.edit_categories)
