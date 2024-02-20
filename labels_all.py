@@ -3,7 +3,7 @@ categories_explained = """
 ### NOT RELEVANT ###
 ====================
 (F) NOT RELEVANT
-We are interested in peer-reviewed publications of primary research articles or 5b-analyses that help us understand the pathology and progression of AD, diagnose it, prevent it, or develop treatments against it. If the publication does not fulfill these criteria, please classify it as NOT RELEVANT. Not relevant are publications on treatments non-specific to AD, on patient care, quality of life and caregivers (except papers that mention quality of life as an outcome of a treatment), papers that only mention AD in the dataset name and papers that focus on other neurodegenerative diseases: PD, FTD etc., with little comparison to AD.
+We are interested in peer-reviewed publications of primary research articles or analyses that help us understand the pathology and progression of AD, diagnose it, prevent it, or develop treatments against it. If the publication does not fulfill these criteria, please classify it as NOT RELEVANT. Not relevant are publications on treatments non-specific to AD, on patient care, quality of life and caregivers (except papers that mention quality of life as an outcome of a treatment), papers that only mention AD in the dataset name and papers that focus on other neurodegenerative diseases: PD, FTD etc., with little comparison to AD. Also not relevant are book chapters, perspective papers, editorials, commentaries, reviews.
 
 ### A - Disease Mechanisms ###
 ==============================

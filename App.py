@@ -11,7 +11,9 @@ from get_categories import Categorizer
 class MyApp(tk.Tk):
     def __init__(self):
         super().__init__()
-        super().configure(bg='white')
+        
+        self.categorizer = Categorizer()
+
         self.engine = create_engine('sqlite:///publications.db')
 
         self.cwd = os.path.dirname(os.path.abspath(__file__))
@@ -70,9 +72,8 @@ class MyApp(tk.Tk):
         num_publications = self.df.shape[0]
         self.info.config(text="Getting the categories of "+str(num_publications)+" publications. This takes one second per publication.")
         self.get_labels_button.config(text="Loading...", state=tk.DISABLED)
-        categorizer = Categorizer()
-        categorizer.get_categories()
-        remaining_publications = categorizer.get_unlabeled_publications()
+        self.categorizer.get_categories()
+        remaining_publications = self.categorizer.get_unlabeled_publications()
         self.info.config(text = "Got labels for "+ str(num_publications-remaining_publications)+ " out of " + str(num_publications) + " publications")
         if remaining_publications == 0:
             self.get_labels_button.pack_forget()
